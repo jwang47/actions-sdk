@@ -59,6 +59,27 @@ export const slackListConversationsDefinition: ActionTemplate = {
   name: "listConversations",
   provider: "slack",
 };
+export const slackCreateReminderDefinition: ActionTemplate = {
+  description: "Creates a reminder",
+  scopes: ["reminders:write"],
+  parameters: {
+    type: "object",
+    required: ["text", "time"],
+    properties: {
+      text: {
+        type: "string",
+        description: "The content of the reminder",
+      },
+      time: {
+        type: "string",
+        description:
+          'When this reminder should happen. Can be the Unix timestamp (up to five years from now), the number of seconds until the reminder (if within 24 hours), or a natural language description (Ex. "in 15 minutes," or "every Thursday")',
+      },
+    },
+  },
+  name: "createReminder",
+  provider: "slack",
+};
 export const mathAddDefinition: ActionTemplate = {
   description: "Adds two numbers together",
   scopes: [],
@@ -1170,64 +1191,4 @@ export const finnhubGetBasicFinancialsDefinition: ActionTemplate = {
   },
   name: "getBasicFinancials",
   provider: "finnhub",
-};
-export const lookerEnableUserByEmailDefinition: ActionTemplate = {
-  description: "Search for a Looker user by email and enable them if disabled",
-  scopes: [],
-  parameters: {
-    type: "object",
-    required: ["userEmail"],
-    properties: {
-      userEmail: {
-        type: "string",
-        description: "The email address of the user to search for",
-      },
-    },
-  },
-  output: {
-    type: "object",
-    required: ["success", "message"],
-    properties: {
-      success: {
-        type: "boolean",
-        description: "Whether the operation was successful",
-      },
-      message: {
-        type: "string",
-        description: "Status message about the operation",
-      },
-      userId: {
-        type: "string",
-        description: "The ID of the user that was found",
-      },
-      userDetails: {
-        type: "object",
-        description: "Details about the user",
-        properties: {
-          id: {
-            type: "string",
-            description: "The ID of the user",
-          },
-          firstName: {
-            type: "string",
-            description: "The first name of the user",
-          },
-          lastName: {
-            type: "string",
-            description: "The last name of the user",
-          },
-          email: {
-            type: "string",
-            description: "The email of the user",
-          },
-          isDisabled: {
-            type: "boolean",
-            description: "Whether the user is disabled",
-          },
-        },
-      },
-    },
-  },
-  name: "enableUserByEmail",
-  provider: "looker",
 };

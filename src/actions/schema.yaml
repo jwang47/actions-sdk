@@ -45,6 +45,37 @@ actions:
                 purpose:
                   type: string
                   description: The purpose of the channel
+    createReminder:
+      description: Creates a reminder
+      scopes:
+        - reminders:write
+      parameters:
+        type: object
+        required: [text, time]
+        properties:
+          text:
+            type: string
+            description: The content of the reminder
+          time:
+            type: string
+            description: When this reminder should happen. Can be the Unix timestamp (up to five years from now), the number of seconds until the reminder (if within 24 hours), or a natural language description (Ex. "in 15 minutes," or "every Thursday")
+          recurrence:
+            type: object
+            description: Specify the repeating behavior of a reminder. Can be "daily", "weekly", "monthly", "yearly". If weekly, may further specify the days of the week.
+            properties:
+              frequency:
+                type: string
+                description: The frequency of the reminder
+                enum: [daily, weekly, monthly, yearly]
+              weekdays:
+                type: array
+                description: The days of the week for the reminder (only applies if frequency is weekly)
+                items:
+                  type: string
+                  enum: [sunday, monday, tuesday, wednesday, thursday, friday, saturday]
+          team_id:
+            type: string
+            description: Encoded team id, required if org token is used
 
   math:
     add:

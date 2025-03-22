@@ -64,6 +64,26 @@ export type slackListConversationsFunction = ActionFunction<
   slackListConversationsOutputType
 >;
 
+export const slackCreateReminderParamsSchema = z.object({
+  text: z.string().describe("The content of the reminder"),
+  time: z
+    .string()
+    .describe(
+      'When this reminder should happen. Can be the Unix timestamp (up to five years from now), the number of seconds until the reminder (if within 24 hours), or a natural language description (Ex. "in 15 minutes," or "every Thursday")',
+    ),
+});
+
+export type slackCreateReminderParamsType = z.infer<typeof slackCreateReminderParamsSchema>;
+
+export const slackCreateReminderOutputSchema = z.void();
+
+export type slackCreateReminderOutputType = z.infer<typeof slackCreateReminderOutputSchema>;
+export type slackCreateReminderFunction = ActionFunction<
+  slackCreateReminderParamsType,
+  AuthParamsType,
+  slackCreateReminderOutputType
+>;
+
 export const mathAddParamsSchema = z.object({
   a: z.number().describe("The first number to add"),
   b: z.number().describe("The second number to add"),
@@ -659,35 +679,4 @@ export type finnhubGetBasicFinancialsFunction = ActionFunction<
   finnhubGetBasicFinancialsParamsType,
   AuthParamsType,
   finnhubGetBasicFinancialsOutputType
->;
-
-// Looker enableUserByEmail types
-export const lookerEnableUserByEmailParamsSchema = z.object({
-  userEmail: z.string().describe("The email address of the user to search for"),
-});
-
-export type lookerEnableUserByEmailParamsType = z.infer<typeof lookerEnableUserByEmailParamsSchema>;
-
-export const lookerEnableUserByEmailOutputSchema = z.object({
-  success: z.boolean().describe("Whether the operation was successful"),
-  message: z.string().describe("Status message about the operation"),
-  userId: z.string().describe("The ID of the user that was found").optional(),
-  userDetails: z
-    .object({
-      id: z.string().describe("The ID of the user"),
-      firstName: z.string().describe("The first name of the user"),
-      lastName: z.string().describe("The last name of the user"),
-      email: z.string().describe("The email of the user"),
-      isDisabled: z.boolean().describe("Whether the user is disabled"),
-    })
-    .describe("Details about the user")
-    .optional(),
-});
-
-export type lookerEnableUserByEmailOutputType = z.infer<typeof lookerEnableUserByEmailOutputSchema>;
-
-export type lookerEnableUserByEmailFunction = ActionFunction<
-  lookerEnableUserByEmailParamsType,
-  AuthParamsType,
-  lookerEnableUserByEmailOutputType
 >;
