@@ -19,7 +19,7 @@ const summarizeChannel: slackSummarizeChannelFunction = async ({
   const { channelName } = params;
 
   const allChannels = await getSlackChannels(client);
-  const channel = allChannels.find(channel => channel.name == channelName && channel.is_private == false);
+  const channel = allChannels.find(channel => channel.name === channelName && channel.is_private === false);
 
   if (!channel || !channel.id) {
     throw Error(`Channel with name ${channelName} not found`);
