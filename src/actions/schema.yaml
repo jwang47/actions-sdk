@@ -45,7 +45,24 @@ actions:
                 purpose:
                   type: string
                   description: The purpose of the channel
-
+    summarizeChannel:
+      description: Fetches up to 50 of the most recent messages from a Slack channel and summarizes them
+      scopes:
+        - channels:history
+      parameters:
+        type: object
+        required: [channel]
+        properties:
+          channel:
+            type: string
+            description: Conversation ID of the channel to summarize
+      output:
+        type: object
+        required: [summary]
+        properties:
+          summary:
+            type: string
+            description: A summary of the messages in the channel
   math:
     add:
       description: Adds two numbers together
