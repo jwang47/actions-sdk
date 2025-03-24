@@ -64,6 +64,23 @@ export type slackListConversationsFunction = ActionFunction<
   slackListConversationsOutputType
 >;
 
+export const slackSummarizeChannelParamsSchema = z.object({
+  channelName: z.string().describe("Name of the channel to summarize"),
+});
+
+export type slackSummarizeChannelParamsType = z.infer<typeof slackSummarizeChannelParamsSchema>;
+
+export const slackSummarizeChannelOutputSchema = z.object({
+  summary: z.string().describe("A summary of the messages in the channel"),
+});
+
+export type slackSummarizeChannelOutputType = z.infer<typeof slackSummarizeChannelOutputSchema>;
+export type slackSummarizeChannelFunction = ActionFunction<
+  slackSummarizeChannelParamsType,
+  AuthParamsType,
+  slackSummarizeChannelOutputType
+>;
+
 export const mathAddParamsSchema = z.object({
   a: z.number().describe("The first number to add"),
   b: z.number().describe("The second number to add"),

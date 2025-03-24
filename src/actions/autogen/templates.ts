@@ -59,6 +59,32 @@ export const slackListConversationsDefinition: ActionTemplate = {
   name: "listConversations",
   provider: "slack",
 };
+export const slackSummarizeChannelDefinition: ActionTemplate = {
+  description: "Fetches up to 50 of the most recent messages from a Slack channel and summarizes them",
+  scopes: ["channels:history"],
+  parameters: {
+    type: "object",
+    required: ["channelName"],
+    properties: {
+      channelName: {
+        type: "string",
+        description: "Name of the channel to summarize",
+      },
+    },
+  },
+  output: {
+    type: "object",
+    required: ["summary"],
+    properties: {
+      summary: {
+        type: "string",
+        description: "A summary of the messages in the channel",
+      },
+    },
+  },
+  name: "summarizeChannel",
+  provider: "slack",
+};
 export const mathAddDefinition: ActionTemplate = {
   description: "Adds two numbers together",
   scopes: [],

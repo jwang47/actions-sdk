@@ -17,6 +17,8 @@ import {
   slackListConversationsParamsSchema,
   slackSendMessageOutputSchema,
   slackSendMessageParamsSchema,
+  slackSummarizeChannelOutputSchema,
+  slackSummarizeChannelParamsSchema,
   snowflakeGetRowByFieldValueOutputSchema,
   snowflakeGetRowByFieldValueParamsSchema,
   zendeskCreateZendeskTicketOutputSchema,
@@ -56,6 +58,7 @@ import add from "./providers/math/add";
 import insertMongoDoc from "./providers/mongodb/insertMongoDoc";
 import listConversations from "./providers/slack/listConversations";
 import sendMessage from "./providers/slack/sendMessage";
+import summarizeChannel from "./providers/slack/summarizeChannel";
 import getRowByFieldValue from "./providers/snowflake/getRowByFieldValue";
 import createZendeskTicket from "./providers/zendesk/createZendeskTicket";
 import createJiraTicket from "./providers/jira/createJiraTicket";
@@ -100,6 +103,11 @@ export const ActionMapper: Record<string, Record<string, ActionFunctionComponent
       fn: sendMessage,
       paramsSchema: slackSendMessageParamsSchema,
       outputSchema: slackSendMessageOutputSchema,
+    },
+    summarizeChannel: {
+      fn: summarizeChannel,
+      paramsSchema: slackSummarizeChannelParamsSchema,
+      outputSchema: slackSummarizeChannelOutputSchema,
     },
   },
   confluence: {
