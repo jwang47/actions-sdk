@@ -34,14 +34,20 @@ const summarizeChannel: slackSummarizeChannelFunction = async ({
     throw Error(`Failed to fetch messages from channel ${channel.name}`);
   }
 
-  const history = messages.messages?.reverse().map(message => message.user + ":" + message.text).join("\n") || "";
+  const history =
+    messages.messages
+      ?.reverse()
+      .map(message => message.user + ":" + message.text)
+      .join("\n") || "";
   const oai = new OpenAI();
   const completion = await oai.chat.completions.create({
     model: "gpt-4o-mini",
-    messages: [{
-      role: "user",
-      content: "Summarize the following messages in the Slack channel:\n" + history,
-    }],
+    messages: [
+      {
+        role: "user",
+        content: "Summarize the following messages in the Slack channel:\n" + history,
+      },
+    ],
   });
 
   const summary = completion.choices[0].message.content || "";
