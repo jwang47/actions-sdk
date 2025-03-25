@@ -177,7 +177,6 @@ actions:
             type: string
             description: The url to the created Jira Ticket
 
-
   googlemaps:
     validateAddress:
       description: Validate a Google Maps address
@@ -440,7 +439,6 @@ actions:
                 contents:
                   type: string
                   description: The contents of the web search result
-        
 
   zendesk:
     createZendeskTicket:
@@ -490,6 +488,22 @@ actions:
           ticket:
             type: object
             description: The details of the ticket
+    assignTicket:
+      description: Assign a ticket in Zendesk to a specific user
+      scopes: []
+      parameters:
+        type: object
+        required: [ticketId, subdomain, assigneeEmail]
+        properties:
+          ticketId:
+            type: string
+            description: The ID of the ticket to update
+          subdomain:
+            type: string
+            description: The subdomain of the Zendesk account
+          assigneeEmail:
+            type: string
+            description: The email address of the agent to assign the ticket to
   linkedin:
     createShareLinkedinPostUrl:
       description: Create a share linkedin post link
@@ -736,7 +750,7 @@ actions:
           content:
             type: string
             description: The content of the URL
-          
+
     scrapeTweetDataWithNitter:
       description: Given A tweet URL scrape the tweet data with nitter+firecrawl
       scopes: []

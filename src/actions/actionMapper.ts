@@ -25,6 +25,8 @@ import {
   zendeskGetTicketDetailsParamsSchema,
   jiraAssignJiraTicketParamsSchema,
   jiraAssignJiraTicketOutputSchema,
+  zendeskAssignTicketOutputSchema,
+  zendeskAssignTicketParamsSchema,
   jiraCreateJiraTicketParamsSchema,
   jiraCreateJiraTicketOutputSchema,
   openstreetmapGetLatitudeLongitudeFromLocationParamsSchema,
@@ -66,6 +68,7 @@ import getRowByFieldValue from "./providers/snowflake/getRowByFieldValue";
 import createZendeskTicket from "./providers/zendesk/createZendeskTicket";
 import getZendeskTicketDetails from "./providers/zendesk/getTicketDetails";
 import assignJiraTicket from "./providers/jira/assignJiraTicket";
+import assignTicket from "./providers/zendesk/assignTicket";
 import createJiraTicket from "./providers/jira/createJiraTicket";
 import getLatitudeLongitudeFromLocation from "./providers/openstreetmap/getLatitudeLongitudeFromLocation";
 import getForecastForLocation from "./providers/nws/getForecastForLocation";
@@ -152,6 +155,11 @@ export const ActionMapper: Record<string, Record<string, ActionFunctionComponent
       fn: getZendeskTicketDetails,
       paramsSchema: zendeskGetTicketDetailsParamsSchema,
       outputSchema: zendeskGetTicketDetailsOutputSchema,
+    },
+    assignTicket: {
+      fn: assignTicket,
+      paramsSchema: zendeskAssignTicketParamsSchema,
+      outputSchema: zendeskAssignTicketOutputSchema,
     },
   },
   mongo: {
