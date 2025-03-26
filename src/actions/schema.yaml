@@ -1139,3 +1139,20 @@ actions:
             type: object
             description: The candidate's information
             required: []
+    listCandidateNotes:
+      description: Lists all notes on a candidate
+      scopes: []
+      parameters:
+        type: object
+        required: [candidateId]
+        properties:
+          candidateId:
+            type: string
+            description: The ID of the candidate
+      output:
+        type: object
+        required: [notes]
+        properties:
+          notes:
+            type: array
+            description: A list of notes
