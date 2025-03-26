@@ -23,6 +23,8 @@ import {
   zendeskCreateZendeskTicketParamsSchema,
   zendeskGetTicketDetailsOutputSchema,
   zendeskGetTicketDetailsParamsSchema,
+  jiraAssignJiraTicketParamsSchema,
+  jiraAssignJiraTicketOutputSchema,
   jiraCreateJiraTicketParamsSchema,
   jiraCreateJiraTicketOutputSchema,
   openstreetmapGetLatitudeLongitudeFromLocationParamsSchema,
@@ -51,6 +53,8 @@ import {
   snowflakeRunSnowflakeQueryOutputSchema,
   lookerEnableUserByEmailParamsSchema,
   lookerEnableUserByEmailOutputSchema,
+  googleOauthScheduleCalendarMeetingParamsSchema,
+  googleOauthScheduleCalendarMeetingOutputSchema,
 } from "./autogen/types";
 import callCopilot from "./providers/credal/callCopilot";
 import validateAddress from "./providers/googlemaps/validateAddress";
@@ -61,6 +65,7 @@ import sendMessage from "./providers/slack/sendMessage";
 import getRowByFieldValue from "./providers/snowflake/getRowByFieldValue";
 import createZendeskTicket from "./providers/zendesk/createZendeskTicket";
 import getZendeskTicketDetails from "./providers/zendesk/getTicketDetails";
+import assignJiraTicket from "./providers/jira/assignJiraTicket";
 import createJiraTicket from "./providers/jira/createJiraTicket";
 import getLatitudeLongitudeFromLocation from "./providers/openstreetmap/getLatitudeLongitudeFromLocation";
 import getForecastForLocation from "./providers/nws/getForecastForLocation";
@@ -77,6 +82,7 @@ import confluenceOverwritePage from "./providers/confluence/overwritePage";
 import confluenceFetchPageContent from "./providers/confluence/fetchPageContent";
 import runSnowflakeQuery from "./providers/snowflake/runSnowflakeQuery";
 import enableUserByEmail from "./providers/looker/enableUserByEmail";
+import scheduleCalendarMeeting from "./providers/google-oauth/scheduleCalendarMeeting";
 
 interface ActionFunctionComponents {
   // eslint-disable-next-line
@@ -175,6 +181,11 @@ export const ActionMapper: Record<string, Record<string, ActionFunctionComponent
     },
   },
   jira: {
+    assignJiraTicket: {
+      fn: assignJiraTicket,
+      paramsSchema: jiraAssignJiraTicketParamsSchema,
+      outputSchema: jiraAssignJiraTicketOutputSchema,
+    },
     createJiraTicket: {
       fn: createJiraTicket,
       paramsSchema: jiraCreateJiraTicketParamsSchema,
@@ -219,6 +230,11 @@ export const ActionMapper: Record<string, Record<string, ActionFunctionComponent
       fn: createNewGoogleDoc,
       paramsSchema: googleOauthCreateNewGoogleDocParamsSchema,
       outputSchema: googleOauthCreateNewGoogleDocOutputSchema,
+    },
+    scheduleCalendarMeeting: {
+      fn: scheduleCalendarMeeting,
+      paramsSchema: googleOauthScheduleCalendarMeetingParamsSchema,
+      outputSchema: googleOauthScheduleCalendarMeetingOutputSchema,
     },
   },
   x: {

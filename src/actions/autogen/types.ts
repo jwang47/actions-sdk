@@ -112,6 +112,30 @@ export type confluenceFetchPageContentFunction = ActionFunction<
   confluenceFetchPageContentOutputType
 >;
 
+export const jiraAssignJiraTicketParamsSchema = z.object({
+  projectKey: z.string().describe("The key for the project you want to add it to"),
+  assignee: z.string().describe("The assignee for the ticket, userID or email"),
+  issueId: z.string().describe("The issue ID associated with the ticket to be assigned/re-assigned"),
+});
+
+export type jiraAssignJiraTicketParamsType = z.infer<typeof jiraAssignJiraTicketParamsSchema>;
+
+export const jiraAssignJiraTicketOutputSchema = z.object({
+  success: z.boolean().describe("Whether the ticket was successfully assigned/reassigned"),
+  error: z
+    .string()
+    .describe("The error that occurred if the ticket was not successfully assigned/reassigned")
+    .optional(),
+  ticketUrl: z.string().describe("The url to the newly assigned/reassigned Jira ticket").optional(),
+});
+
+export type jiraAssignJiraTicketOutputType = z.infer<typeof jiraAssignJiraTicketOutputSchema>;
+export type jiraAssignJiraTicketFunction = ActionFunction<
+  jiraAssignJiraTicketParamsType,
+  AuthParamsType,
+  jiraAssignJiraTicketOutputType
+>;
+
 export const jiraCreateJiraTicketParamsSchema = z.object({
   projectKey: z.string().describe("The key for the project you want to add it to"),
   summary: z.string().describe("The summary of the new ticket"),
@@ -452,6 +476,7 @@ export const snowflakeRunSnowflakeQueryParamsSchema = z.object({
 export type snowflakeRunSnowflakeQueryParamsType = z.infer<typeof snowflakeRunSnowflakeQueryParamsSchema>;
 
 export const snowflakeRunSnowflakeQueryOutputSchema = z.object({
+  format: z.enum(["json", "csv"]).describe("The format of the output"),
   content: z.string().describe("The content of the query result (json)"),
   rowCount: z.number().describe("The number of rows returned by the query"),
 });
@@ -589,6 +614,39 @@ export type googleOauthCreateNewGoogleDocFunction = ActionFunction<
   googleOauthCreateNewGoogleDocParamsType,
   AuthParamsType,
   googleOauthCreateNewGoogleDocOutputType
+>;
+
+export const googleOauthScheduleCalendarMeetingParamsSchema = z.object({
+  calendarId: z.string().describe("The ID of the calendar to schedule the meeting on"),
+  name: z.string().describe("The name of the meeting"),
+  start: z.string().describe("The start time of the meeting"),
+  end: z.string().describe("The end time of the meeting"),
+  description: z.string().describe("The description of the meeting").optional(),
+  attendees: z
+    .array(z.string().describe("The email of the attendee"))
+    .describe("The attendees of the meeting")
+    .optional(),
+  useGoogleMeet: z.boolean().describe("Whether to use Google Meet for the meeting").optional(),
+});
+
+export type googleOauthScheduleCalendarMeetingParamsType = z.infer<
+  typeof googleOauthScheduleCalendarMeetingParamsSchema
+>;
+
+export const googleOauthScheduleCalendarMeetingOutputSchema = z.object({
+  success: z.boolean().describe("Whether the meeting was scheduled successfully"),
+  eventId: z.string().describe("The ID of the event that was scheduled").optional(),
+  eventUrl: z.string().describe("The URL to access the scheduled event").optional(),
+  error: z.string().describe("The error that occurred if the meeting was not scheduled successfully").optional(),
+});
+
+export type googleOauthScheduleCalendarMeetingOutputType = z.infer<
+  typeof googleOauthScheduleCalendarMeetingOutputSchema
+>;
+export type googleOauthScheduleCalendarMeetingFunction = ActionFunction<
+  googleOauthScheduleCalendarMeetingParamsType,
+  AuthParamsType,
+  googleOauthScheduleCalendarMeetingOutputType
 >;
 
 export const finnhubSymbolLookupParamsSchema = z.object({

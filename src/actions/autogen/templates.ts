@@ -147,6 +147,48 @@ export const confluenceFetchPageContentDefinition: ActionTemplate = {
   name: "fetchPageContent",
   provider: "confluence",
 };
+export const jiraAssignJiraTicketDefinition: ActionTemplate = {
+  description: "Assigns/Re-assignes a Jira ticket to a specified user",
+  scopes: ["write:jira-work", "read:jira-user"],
+  parameters: {
+    type: "object",
+    required: ["projectKey", "issueId", "assignee"],
+    properties: {
+      projectKey: {
+        type: "string",
+        description: "The key for the project you want to add it to",
+      },
+      assignee: {
+        type: "string",
+        description: "The assignee for the ticket, userID or email",
+      },
+      issueId: {
+        type: "string",
+        description: "The issue ID associated with the ticket to be assigned/re-assigned",
+      },
+    },
+  },
+  output: {
+    type: "object",
+    required: ["success"],
+    properties: {
+      success: {
+        type: "boolean",
+        description: "Whether the ticket was successfully assigned/reassigned",
+      },
+      error: {
+        type: "string",
+        description: "The error that occurred if the ticket was not successfully assigned/reassigned",
+      },
+      ticketUrl: {
+        type: "string",
+        description: "The url to the newly assigned/reassigned Jira ticket",
+      },
+    },
+  },
+  name: "assignJiraTicket",
+  provider: "jira",
+};
 export const jiraCreateJiraTicketDefinition: ActionTemplate = {
   description: "Create a jira ticket with new content specified",
   scopes: [],
@@ -838,8 +880,13 @@ export const snowflakeRunSnowflakeQueryDefinition: ActionTemplate = {
   },
   output: {
     type: "object",
-    required: ["content", "rowCount"],
+    required: ["format", "content", "rowCount"],
     properties: {
+      format: {
+        type: "string",
+        description: "The format of the output",
+        enum: ["json", "csv"],
+      },
       content: {
         type: "string",
         description: "The content of the query result (json)",
@@ -1067,6 +1114,72 @@ export const googleOauthCreateNewGoogleDocDefinition: ActionTemplate = {
     },
   },
   name: "createNewGoogleDoc",
+  provider: "googleOauth",
+};
+export const googleOauthScheduleCalendarMeetingDefinition: ActionTemplate = {
+  description: "Schedule a meeting on google calendar using OAuth authentication",
+  scopes: [],
+  parameters: {
+    type: "object",
+    required: ["calendarId", "name", "start", "end"],
+    properties: {
+      calendarId: {
+        type: "string",
+        description: "The ID of the calendar to schedule the meeting on",
+      },
+      name: {
+        type: "string",
+        description: "The name of the meeting",
+      },
+      start: {
+        type: "string",
+        description: "The start time of the meeting",
+      },
+      end: {
+        type: "string",
+        description: "The end time of the meeting",
+      },
+      description: {
+        type: "string",
+        description: "The description of the meeting",
+      },
+      attendees: {
+        type: "array",
+        description: "The attendees of the meeting",
+        items: {
+          type: "string",
+          description: "The email of the attendee",
+        },
+      },
+      useGoogleMeet: {
+        type: "boolean",
+        description: "Whether to use Google Meet for the meeting",
+      },
+    },
+  },
+  output: {
+    type: "object",
+    required: ["success"],
+    properties: {
+      success: {
+        type: "boolean",
+        description: "Whether the meeting was scheduled successfully",
+      },
+      eventId: {
+        type: "string",
+        description: "The ID of the event that was scheduled",
+      },
+      eventUrl: {
+        type: "string",
+        description: "The URL to access the scheduled event",
+      },
+      error: {
+        type: "string",
+        description: "The error that occurred if the meeting was not scheduled successfully",
+      },
+    },
+  },
+  name: "scheduleCalendarMeeting",
   provider: "googleOauth",
 };
 export const finnhubSymbolLookupDefinition: ActionTemplate = {
