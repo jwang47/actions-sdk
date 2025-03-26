@@ -907,3 +907,21 @@ export type ashbyGetCandidateInfoFunction = ActionFunction<
   AuthParamsType,
   ashbyGetCandidateInfoOutputType
 >;
+
+export const ashbySearchCandidatesParamsSchema = z.object({
+  email: z.string().describe("The email address of the candidate to search for").optional(),
+  name: z.string().describe("The name of the candidate to search for").optional(),
+});
+
+export type ashbySearchCandidatesParamsType = z.infer<typeof ashbySearchCandidatesParamsSchema>;
+
+export const ashbySearchCandidatesOutputSchema = z.object({
+  candidates: z.array(z.any()).describe("A list of candidates"),
+});
+
+export type ashbySearchCandidatesOutputType = z.infer<typeof ashbySearchCandidatesOutputSchema>;
+export type ashbySearchCandidatesFunction = ActionFunction<
+  ashbySearchCandidatesParamsType,
+  AuthParamsType,
+  ashbySearchCandidatesOutputType
+>;

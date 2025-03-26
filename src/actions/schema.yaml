@@ -1139,3 +1139,23 @@ actions:
             type: object
             description: The candidate's information
             required: []
+    searchCandidates:
+      description: Search for candidates by email and/or name.
+      scopes: []
+      parameters:
+        type: object
+        required: []
+        properties:
+          email:
+            type: string
+            description: The email address of the candidate to search for
+          name:
+            type: string
+            description: The name of the candidate to search for
+      output:
+        type: object
+        required: [candidates]
+        properties:
+          candidates:
+            type: array
+            description: A list of candidates

@@ -1579,7 +1579,7 @@ export const ashbyGetCandidateInfoDefinition: ActionTemplate = {
     properties: {
       candidateId: {
         type: "string",
-        description: "The ID of the candidate whose information is to be retrieved",
+        description: "The ID of the candidate to create a note for",
       },
     },
   },
@@ -1595,5 +1595,35 @@ export const ashbyGetCandidateInfoDefinition: ActionTemplate = {
     },
   },
   name: "getCandidateInfo",
+  provider: "ashby",
+};
+export const ashbySearchCandidatesDefinition: ActionTemplate = {
+  description: "Search for candidates by email and/or name.",
+  scopes: [],
+  parameters: {
+    type: "object",
+    required: [],
+    properties: {
+      email: {
+        type: "string",
+        description: "The email address of the candidate to search for",
+      },
+      name: {
+        type: "string",
+        description: "The name of the candidate to search for",
+      },
+    },
+  },
+  output: {
+    type: "object",
+    required: ["candidates"],
+    properties: {
+      candidates: {
+        type: "array",
+        description: "A list of candidates",
+      },
+    },
+  },
+  name: "searchCandidates",
   provider: "ashby",
 };
