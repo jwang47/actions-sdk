@@ -907,3 +907,53 @@ export type ashbyGetCandidateInfoFunction = ActionFunction<
   AuthParamsType,
   ashbyGetCandidateInfoOutputType
 >;
+
+export const ashbyUpdateCandidateParamsSchema = z.object({
+  candidateId: z.string().describe("The ID of the candidate to update"),
+  name: z.string().describe("The first and last name of the candidate to update.").optional(),
+  email: z.string().describe("Primary, personal email of the candidate to update.").optional(),
+  phoneNumber: z.string().describe("Primary, personal phone number of the candidate to update.").optional(),
+  linkedInUrl: z.string().describe("Url to the candidate's LinkedIn profile. Must be a valid Url.").optional(),
+  githubUrl: z.string().describe("Url to the candidate's Github profile. Must be a valid Url.").optional(),
+  websiteUrl: z.string().describe("Url of the candidate's website. Must be a valid Url.").optional(),
+  alternateEmail: z.string().describe("An alternate email address to add to the candidate's profile.").optional(),
+  socialLinks: z
+    .array(
+      z.object({
+        type: z.string().describe("The type of social link").optional(),
+        url: z.string().describe("The URL of the social link").optional(),
+      }),
+    )
+    .describe(
+      "An array of social links to set on the candidate. This value replaces existing socialLinks that have been set on the candidate.",
+    )
+    .optional(),
+  sourceId: z.string().describe("The id of source for this candidate.").optional(),
+  creditedToUserId: z.string().describe("The id of the user the candidate will be credited to.").optional(),
+  location: z
+    .object({
+      city: z.string().describe("The city of the candidate").optional(),
+      state: z.string().describe("The state of the candidate").optional(),
+      country: z.string().describe("The country of the candidate").optional(),
+    })
+    .describe("The location of the candidate.")
+    .optional(),
+  createdAt: z.string().describe("An ISO date string to set the candidate's createdAt timestamp.").optional(),
+  sendNotifications: z
+    .boolean()
+    .describe(
+      "Whether or not users who are subscribed to the candidate should be notified that candidate was updated. Default is true.",
+    )
+    .optional(),
+});
+
+export type ashbyUpdateCandidateParamsType = z.infer<typeof ashbyUpdateCandidateParamsSchema>;
+
+export const ashbyUpdateCandidateOutputSchema = z.void();
+
+export type ashbyUpdateCandidateOutputType = z.infer<typeof ashbyUpdateCandidateOutputSchema>;
+export type ashbyUpdateCandidateFunction = ActionFunction<
+  ashbyUpdateCandidateParamsType,
+  AuthParamsType,
+  ashbyUpdateCandidateOutputType
+>;

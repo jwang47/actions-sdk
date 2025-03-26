@@ -69,6 +69,8 @@ import {
   ashbyCreateNoteOutputSchema,
   ashbyGetCandidateInfoParamsSchema,
   ashbyGetCandidateInfoOutputSchema,
+  ashbyUpdateCandidateParamsSchema,
+  ashbyUpdateCandidateOutputSchema,
 } from "./autogen/types";
 import callCopilot from "./providers/credal/callCopilot";
 import validateAddress from "./providers/googlemaps/validateAddress";
@@ -104,6 +106,7 @@ import enableUserByEmail from "./providers/looker/enableUserByEmail";
 import scheduleCalendarMeeting from "./providers/google-oauth/scheduleCalendarMeeting";
 import createNote from "./providers/ashby/createNote";
 import getCandidateInfo from "./providers/ashby/getCandidateInfo";
+import updateCandidate from "./providers/ashby/updateCandidate";
 
 interface ActionFunctionComponents {
   // eslint-disable-next-line
@@ -319,6 +322,11 @@ export const ActionMapper: Record<string, Record<string, ActionFunctionComponent
       fn: getCandidateInfo,
       paramsSchema: ashbyGetCandidateInfoParamsSchema,
       outputSchema: ashbyGetCandidateInfoOutputSchema,
+    },
+    updateCandidate: {
+      fn: updateCandidate,
+      paramsSchema: ashbyUpdateCandidateParamsSchema,
+      outputSchema: ashbyUpdateCandidateOutputSchema,
     },
   },
 };

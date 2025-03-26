@@ -1579,7 +1579,7 @@ export const ashbyGetCandidateInfoDefinition: ActionTemplate = {
     properties: {
       candidateId: {
         type: "string",
-        description: "The ID of the candidate whose information is to be retrieved",
+        description: "The ID of the candidate to create a note for",
       },
     },
   },
@@ -1595,5 +1595,102 @@ export const ashbyGetCandidateInfoDefinition: ActionTemplate = {
     },
   },
   name: "getCandidateInfo",
+  provider: "ashby",
+};
+export const ashbyUpdateCandidateDefinition: ActionTemplate = {
+  description: "Updates a candidate",
+  scopes: [],
+  parameters: {
+    type: "object",
+    required: ["candidateId"],
+    properties: {
+      candidateId: {
+        type: "string",
+        description: "The ID of the candidate to update",
+      },
+      name: {
+        type: "string",
+        description: "The first and last name of the candidate to update.",
+      },
+      email: {
+        type: "string",
+        description: "Primary, personal email of the candidate to update.",
+      },
+      phoneNumber: {
+        type: "string",
+        description: "Primary, personal phone number of the candidate to update.",
+      },
+      linkedInUrl: {
+        type: "string",
+        description: "Url to the candidate's LinkedIn profile. Must be a valid Url.",
+      },
+      githubUrl: {
+        type: "string",
+        description: "Url to the candidate's Github profile. Must be a valid Url.",
+      },
+      websiteUrl: {
+        type: "string",
+        description: "Url of the candidate's website. Must be a valid Url.",
+      },
+      alternateEmail: {
+        type: "string",
+        description: "An alternate email address to add to the candidate's profile.",
+      },
+      socialLinks: {
+        type: "array",
+        description:
+          "An array of social links to set on the candidate. This value replaces existing socialLinks that have been set on the candidate.",
+        items: {
+          type: "object",
+          properties: {
+            type: {
+              type: "string",
+              description: "The type of social link",
+            },
+            url: {
+              type: "string",
+              description: "The URL of the social link",
+            },
+          },
+        },
+      },
+      sourceId: {
+        type: "string",
+        description: "The id of source for this candidate.",
+      },
+      creditedToUserId: {
+        type: "string",
+        description: "The id of the user the candidate will be credited to.",
+      },
+      location: {
+        type: "object",
+        description: "The location of the candidate.",
+        properties: {
+          city: {
+            type: "string",
+            description: "The city of the candidate",
+          },
+          state: {
+            type: "string",
+            description: "The state of the candidate",
+          },
+          country: {
+            type: "string",
+            description: "The country of the candidate",
+          },
+        },
+      },
+      createdAt: {
+        type: "string",
+        description: "An ISO date string to set the candidate's createdAt timestamp.",
+      },
+      sendNotifications: {
+        type: "boolean",
+        description:
+          "Whether or not users who are subscribed to the candidate should be notified that candidate was updated. Default is true.",
+      },
+    },
+  },
+  name: "updateCandidate",
   provider: "ashby",
 };
