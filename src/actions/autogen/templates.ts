@@ -1579,7 +1579,7 @@ export const ashbyGetCandidateInfoDefinition: ActionTemplate = {
     properties: {
       candidateId: {
         type: "string",
-        description: "The ID of the candidate whose information is to be retrieved",
+        description: "The ID of the candidate to create a note for",
       },
     },
   },
@@ -1595,5 +1595,74 @@ export const ashbyGetCandidateInfoDefinition: ActionTemplate = {
     },
   },
   name: "getCandidateInfo",
+  provider: "ashby",
+};
+export const ashbyCreateCandidateDefinition: ActionTemplate = {
+  description: "Creates a candidate",
+  scopes: [],
+  parameters: {
+    type: "object",
+    required: ["name"],
+    properties: {
+      name: {
+        type: "string",
+        description: "The first and last name of the candidate to be created.",
+      },
+      email: {
+        type: "string",
+        description: "Primary, personal email of the candidate to be created.",
+      },
+      phoneNumber: {
+        type: "string",
+        description: "Primary, personal phone number of the candidate to be created.",
+      },
+      linkedInUrl: {
+        type: "string",
+        description: "Url to the candidate's LinkedIn profile. Must be a valid Url.",
+      },
+      githubUrl: {
+        type: "string",
+        description: "Url to the candidate's Github profile. Must be a valid Url.",
+      },
+      website: {
+        type: "string",
+        description: "Url of the candidate's website. Must be a valid Url.",
+      },
+      alternateEmailAddresses: {
+        type: "array",
+        description: "Array of alternate email address to add to the candidate's profile.",
+        items: {
+          type: "string",
+        },
+      },
+      sourceId: {
+        type: "string",
+        description: "The source to set on the candidate being created.",
+      },
+      creditedToUserId: {
+        type: "string",
+        description: "The id of the user the candidate will be credited to.",
+      },
+      location: {
+        type: "object",
+        description: "The location of the candidate.",
+        properties: {
+          city: {
+            type: "string",
+            description: "The city of the candidate.",
+          },
+          region: {
+            type: "string",
+            description: "The region of the candidate.",
+          },
+          country: {
+            type: "string",
+            description: "The country of the candidate.",
+          },
+        },
+      },
+    },
+  },
+  name: "createCandidate",
   provider: "ashby",
 };

@@ -907,3 +907,37 @@ export type ashbyGetCandidateInfoFunction = ActionFunction<
   AuthParamsType,
   ashbyGetCandidateInfoOutputType
 >;
+
+export const ashbyCreateCandidateParamsSchema = z.object({
+  name: z.string().describe("The first and last name of the candidate to be created."),
+  email: z.string().describe("Primary, personal email of the candidate to be created.").optional(),
+  phoneNumber: z.string().describe("Primary, personal phone number of the candidate to be created.").optional(),
+  linkedInUrl: z.string().describe("Url to the candidate's LinkedIn profile. Must be a valid Url.").optional(),
+  githubUrl: z.string().describe("Url to the candidate's Github profile. Must be a valid Url.").optional(),
+  website: z.string().describe("Url of the candidate's website. Must be a valid Url.").optional(),
+  alternateEmailAddresses: z
+    .array(z.string())
+    .describe("Array of alternate email address to add to the candidate's profile.")
+    .optional(),
+  sourceId: z.string().describe("The source to set on the candidate being created.").optional(),
+  creditedToUserId: z.string().describe("The id of the user the candidate will be credited to.").optional(),
+  location: z
+    .object({
+      city: z.string().describe("The city of the candidate.").optional(),
+      region: z.string().describe("The region of the candidate.").optional(),
+      country: z.string().describe("The country of the candidate.").optional(),
+    })
+    .describe("The location of the candidate.")
+    .optional(),
+});
+
+export type ashbyCreateCandidateParamsType = z.infer<typeof ashbyCreateCandidateParamsSchema>;
+
+export const ashbyCreateCandidateOutputSchema = z.void();
+
+export type ashbyCreateCandidateOutputType = z.infer<typeof ashbyCreateCandidateOutputSchema>;
+export type ashbyCreateCandidateFunction = ActionFunction<
+  ashbyCreateCandidateParamsType,
+  AuthParamsType,
+  ashbyCreateCandidateOutputType
+>;
