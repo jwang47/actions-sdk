@@ -1,19 +1,19 @@
 import {
-  ashbyCreateNoteFunction,
-  ashbyCreateNoteOutputType,
-  ashbyCreateNoteParamsType,
+  ashbySearchCandidatesFunction,
+  ashbySearchCandidatesOutputType,
+  ashbySearchCandidatesParamsType,
   AuthParamsType,
 } from "../../autogen/types";
 
 import { axiosClient } from "../../util/axiosClient";
-const createNote: ashbyCreateNoteFunction = async ({
+const searchCandidates: ashbySearchCandidatesFunction = async ({
   params,
   authParams,
 }: {
-  params: ashbyCreateNoteParamsType;
+  params: ashbySearchCandidatesParamsType;
   authParams: AuthParamsType;
-}): Promise<ashbyCreateNoteOutputType> => {
-  const { candidateId, note } = params;
+}): Promise<ashbySearchCandidatesOutputType> => {
+  const { email, name } = params;
   const { authToken } = authParams;
 
   if (!authToken) {
@@ -21,10 +21,10 @@ const createNote: ashbyCreateNoteFunction = async ({
   }
 
   const response = await axiosClient.post(
-    `https://api.ashbyhq.com/candidate.createNote`,
+    `https://api.ashbyhq.com/candidate.search`,
     {
-      candidateId,
-      note,
+      email,
+      name,
     },
     {
       auth: {
@@ -36,6 +36,10 @@ const createNote: ashbyCreateNoteFunction = async ({
   if (!response.data.success) {
     throw new Error(response.data.errors.join("; "));
   }
+
+  return {
+    candidates: response.data.results,
+  };
 };
 
-export default createNote;
+export default searchCandidates;

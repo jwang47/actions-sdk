@@ -1,19 +1,19 @@
 import {
-  ashbyCreateNoteFunction,
-  ashbyCreateNoteOutputType,
-  ashbyCreateNoteParamsType,
+  ashbyAddCandidateToProjectFunction,
+  ashbyAddCandidateToProjectOutputType,
+  ashbyAddCandidateToProjectParamsType,
   AuthParamsType,
 } from "../../autogen/types";
 
 import { axiosClient } from "../../util/axiosClient";
-const createNote: ashbyCreateNoteFunction = async ({
+const addCandidateToProject: ashbyAddCandidateToProjectFunction = async ({
   params,
   authParams,
 }: {
-  params: ashbyCreateNoteParamsType;
+  params: ashbyAddCandidateToProjectParamsType;
   authParams: AuthParamsType;
-}): Promise<ashbyCreateNoteOutputType> => {
-  const { candidateId, note } = params;
+}): Promise<ashbyAddCandidateToProjectOutputType> => {
+  const { candidateId, projectId } = params;
   const { authToken } = authParams;
 
   if (!authToken) {
@@ -21,10 +21,10 @@ const createNote: ashbyCreateNoteFunction = async ({
   }
 
   const response = await axiosClient.post(
-    `https://api.ashbyhq.com/candidate.createNote`,
+    `https://api.ashbyhq.com/candidate.addProject`,
     {
       candidateId,
-      note,
+      projectId,
     },
     {
       auth: {
@@ -38,4 +38,4 @@ const createNote: ashbyCreateNoteFunction = async ({
   }
 };
 
-export default createNote;
+export default addCandidateToProject;
