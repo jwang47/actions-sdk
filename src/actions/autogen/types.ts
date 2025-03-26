@@ -907,3 +907,18 @@ export type ashbyGetCandidateInfoFunction = ActionFunction<
   AuthParamsType,
   ashbyGetCandidateInfoOutputType
 >;
+
+export const ashbyListCandidatesParamsSchema = z.object({});
+
+export type ashbyListCandidatesParamsType = z.infer<typeof ashbyListCandidatesParamsSchema>;
+
+export const ashbyListCandidatesOutputSchema = z.object({
+  candidates: z.array(z.any()).describe("A list of candidates"),
+});
+
+export type ashbyListCandidatesOutputType = z.infer<typeof ashbyListCandidatesOutputSchema>;
+export type ashbyListCandidatesFunction = ActionFunction<
+  ashbyListCandidatesParamsType,
+  AuthParamsType,
+  ashbyListCandidatesOutputType
+>;

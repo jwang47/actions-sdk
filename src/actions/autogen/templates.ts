@@ -1579,7 +1579,7 @@ export const ashbyGetCandidateInfoDefinition: ActionTemplate = {
     properties: {
       candidateId: {
         type: "string",
-        description: "The ID of the candidate whose information is to be retrieved",
+        description: "The ID of the candidate to create a note for",
       },
     },
   },
@@ -1595,5 +1595,21 @@ export const ashbyGetCandidateInfoDefinition: ActionTemplate = {
     },
   },
   name: "getCandidateInfo",
+  provider: "ashby",
+};
+export const ashbyListCandidatesDefinition: ActionTemplate = {
+  description: "Lists all candidates",
+  scopes: [],
+  output: {
+    type: "object",
+    required: ["candidates"],
+    properties: {
+      candidates: {
+        type: "array",
+        description: "A list of candidates",
+      },
+    },
+  },
+  name: "listCandidates",
   provider: "ashby",
 };

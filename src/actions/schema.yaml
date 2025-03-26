@@ -1130,7 +1130,7 @@ actions:
         properties:
           candidateId:
             type: string
-            description: The ID of the candidate to create a note for
+            description: The ID of the candidate to whose information is to be retrieved
       output:
         type: object
         required: [candidate]
@@ -1139,3 +1139,13 @@ actions:
             type: object
             description: The candidate's information
             required: []
+    listCandidates:
+      description: Lists all candidates
+      scopes: []
+      output:
+        type: object
+        required: [candidates]
+        properties:
+          candidates:
+            type: array
+            description: A list of candidates
