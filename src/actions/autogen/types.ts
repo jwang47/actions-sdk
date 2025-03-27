@@ -892,7 +892,7 @@ export type ashbyCreateNoteFunction = ActionFunction<
 >;
 
 export const ashbyGetCandidateInfoParamsSchema = z.object({
-  candidateId: z.string().describe("The ID of the candidate to whose information is to be retrieved"),
+  candidateId: z.string().describe("The ID of the candidate whose information is to be retrieved"),
 });
 
 export type ashbyGetCandidateInfoParamsType = z.infer<typeof ashbyGetCandidateInfoParamsSchema>;
