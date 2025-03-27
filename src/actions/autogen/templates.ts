@@ -1579,7 +1579,7 @@ export const ashbyGetCandidateInfoDefinition: ActionTemplate = {
     properties: {
       candidateId: {
         type: "string",
-        description: "The ID of the candidate to whose information is to be retrieved",
+        description: "The ID of the candidate whose information is to be retrieved",
       },
     },
   },
