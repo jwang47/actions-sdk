@@ -365,6 +365,6 @@ export const ActionMapper: Record<string, Record<string, ActionFunctionComponent
       fn: addCandidateToProject,
       paramsSchema: ashbyUpdateCandidateParamsSchema,
       outputSchema: ashbyUpdateCandidateOutputSchema,
-    }
+    },
   },
 };

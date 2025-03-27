@@ -1031,7 +1031,7 @@ export const ashbyUpdateCandidateParamsSchema = z.object({
   location: z
     .object({
       city: z.string().describe("The city of the candidate").optional(),
-      state: z.string().describe("The state of the candidate").optional(),
+      region: z.string().describe("The region of the candidate").optional(),
       country: z.string().describe("The country of the candidate").optional(),
     })
     .describe("The location of the candidate.")

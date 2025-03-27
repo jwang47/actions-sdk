@@ -35,7 +35,7 @@ const getCandidateInfo: ashbyGetCandidateInfoFunction = async ({
   if (!response.data.success) {
     throw new Error(response.data.errors.join("; "));
   }
-  
+
   return {
     candidate: response.data,
   };

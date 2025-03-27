@@ -1722,7 +1722,7 @@ export const ashbyCreateCandidateDefinition: ActionTemplate = {
       },
       alternateEmailAddresses: {
         type: "array",
-        description: "Array of alternate email addresses to add to the candidate's profile.",
+        description: "Array of alternate email address to add to the candidate's profile.",
         items: {
           type: "string",
         },
@@ -1831,9 +1831,9 @@ export const ashbyUpdateCandidateDefinition: ActionTemplate = {
             type: "string",
             description: "The city of the candidate",
           },
-          state: {
+          region: {
             type: "string",
-            description: "The state of the candidate",
+            description: "The region of the candidate",
           },
           country: {
             type: "string",

@@ -22,30 +22,23 @@ const updateCandidate: ashbyUpdateCandidateFunction = async ({
     throw new Error("Candidate ID is required");
   }
 
-  const body: Record<string, any> = {
+  const body: Partial<ashbyUpdateCandidateParamsType> = {
     candidateId: params.candidateId,
   };
-  // populate body with fields that are not null or undefined
-  const fields: (keyof ashbyUpdateCandidateParamsType)[] = [
-    "name",
-    "email",
-    "phoneNumber",
-    "linkedInUrl",
-    "githubUrl",
-    "websiteUrl",
-    "alternateEmail",
-    "socialLinks",
-    "sourceId",
-    "creditedToUserId",
-    "location",
-    "createdAt",
-    "sendNotifications",
-  ];
-  fields.forEach(field => {
-    if (params[field] !== undefined && params[field] !== null) {
-      body[field] = params[field];
-    }
-  });
+
+  if (params.name !== undefined) body.name = params.name;
+  if (params.email !== undefined) body.email = params.email;
+  if (params.phoneNumber !== undefined) body.phoneNumber = params.phoneNumber;
+  if (params.linkedInUrl !== undefined) body.linkedInUrl = params.linkedInUrl;
+  if (params.githubUrl !== undefined) body.githubUrl = params.githubUrl;
+  if (params.websiteUrl !== undefined) body.websiteUrl = params.websiteUrl;
+  if (params.alternateEmail !== undefined) body.alternateEmail = params.alternateEmail;
+  if (params.socialLinks !== undefined) body.socialLinks = params.socialLinks;
+  if (params.sourceId !== undefined) body.sourceId = params.sourceId;
+  if (params.creditedToUserId !== undefined) body.creditedToUserId = params.creditedToUserId;
+  if (params.location !== undefined) body.location = params.location;
+  if (params.createdAt !== undefined) body.createdAt = params.createdAt;
+  if (params.sendNotifications !== undefined) body.sendNotifications = params.sendNotifications;
 
   const response = await axiosClient.post(`https://api.ashbyhq.com/candidate.update`, body, {
     auth: {
