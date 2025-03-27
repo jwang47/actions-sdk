@@ -1722,7 +1722,7 @@ export const ashbyCreateCandidateDefinition: ActionTemplate = {
       },
       alternateEmailAddresses: {
         type: "array",
-        description: "Array of alternate email address to add to the candidate's profile.",
+        description: "Array of alternate email addresses to add to the candidate's profile.",
         items: {
           type: "string",
         },
